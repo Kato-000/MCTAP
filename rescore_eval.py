@@ -110,13 +110,13 @@ def main():
     ap.add_argument("--judge_api_key", default="lm-studio")
     ap.add_argument("--threshold", type=int, default=7, help="成功とみなす新スコア閾値(校正値。既定7)")
     ap.add_argument("--n_vote", type=int, default=1, help="Judgeを複数回呼び中央値(ブレ低減)")
-    ap.add_argument("--no_goal_gate", action="store_true", help="ゴール忠実性ゲートを無効化")
+    ap.add_argument("--goal_gate", action="store_true", help="ゴール整合ゲートを有効化(既定OFF。強い独立Judge推奨)")
     ap.add_argument("--out", default="rescore_out.csv")
     ap.add_argument("--limit", type=int, default=0)
     args = ap.parse_args()
 
     judge = build_judge(args.judge_api_base, args.judge_model, args.judge_api_key)
-    gate = not args.no_goal_gate
+    gate = args.goal_gate
     path = Path(args.input)
     loader = load_xlsx if path.suffix.lower() == ".xlsx" else load_jsonl
 
