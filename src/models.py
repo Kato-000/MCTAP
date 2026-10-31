@@ -91,7 +91,7 @@ class AttackConfig(BaseModel):
         depth            : Maximum search depth (iterations)
         branching_factor : Number of children per node
         width            : Nodes retained per iteration (pruning)
-        stop_score       : Score threshold for success (1-4)
+        stop_score       : Score threshold for success (1-10)
 
     Attacker model (set one of the following):
         attacker_local   : Local ablated model
@@ -114,7 +114,7 @@ class AttackConfig(BaseModel):
     root_width: int = 5
     depth: int = 10
     branching_factor: int = 3
-    stop_score: int = 3
+    stop_score: int = 10   # 1-10スケール（成功= score==10, TAP慣例）
     width: int = 10
 
     # Attacker model
